@@ -129,7 +129,9 @@ mod tests {
         }
 
         // Get entries within 2500ms window from time 5000
+        // Window means: entries where (now - timestamp) <= window_ms
+        // So 5000-3000=2000 <= 2500 ✓ and 5000-4000=1000 <= 2500 ✓
         let recent = ledger.recent_window(2500, 5000);
-        assert_eq!(recent.len(), 3); // timestamps 2000, 3000, 4000
+        assert_eq!(recent.len(), 2); // timestamps 3000, 4000
     }
 }
